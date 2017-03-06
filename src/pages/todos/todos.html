@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Todo List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+	<h3>My Todos</h3>
+	<ul>
+		<li *ngFor="let todo of todos">
+			{{todo.text}} - {{todo.completed}}
+		</li>
+	</ul>
+
+</ion-content>

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+	<h3>To continue, login below:</h3>
+	<form [formGroup]="loginForm" (ngSubmit)="doLogin($event)">
+		<ion-list>
+		
+			<ion-item>
+				<ion-input placeholder="Email" type="text" formControlName="email"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-input placeholder="Password" type="password" formControlName="password"></ion-input>
+			</ion-item>			
+	
+		</ion-list>
+	
+		<button ion-button block round type="submit">Login</button>
+		
+	</form>
+	
+	<p>Don't have an account? <a href="">Sign up</a></p>
+	<div *ngFor="let item of testArray">
+		{{item.title}}
+	</div>
+	
+	<p>{{token}}</p>
+  <!-- <p>
+    <button ion-button color="primary" menuToggle>Toggle Menu</button>
+  </p> -->
+
+</ion-content>
