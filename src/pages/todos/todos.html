@@ -11,10 +11,17 @@
 <ion-content padding>
 
 	<h3>My Todos</h3>
-	<ul>
+<!-- 	<ul>
 		<li *ngFor="let todo of todos">
-			{{todo.text}} - {{todo.completed}}
+			<input type="checkbox" name="todoCheck" [(ngModel)]="todo.completed" (change)="handleTodoChange($event, todo)" />{{todo.text}}
 		</li>
-	</ul>
-
+	</ul> -->
+	
+	<ion-list>
+		<ion-item *ngFor="let todo of todos">
+			<ion-label>{{todo.text}}</ion-label>
+			<ion-checkbox color="" [(ngModel)]="todo.completed" (ionChange)="handleTodoChange($event, todo)"></ion-checkbox>
+		</ion-item>
+	</ion-list>
+	
 </ion-content>

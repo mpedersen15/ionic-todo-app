@@ -1,4 +1,4 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , OnInit, OnDestroy} from '@angular/core';
 import {TodoService} from '../../app/todo.service';
 import { NavController } from 'ionic-angular';
 
@@ -6,12 +6,25 @@ import { NavController } from 'ionic-angular';
   selector: 'page-todos',
   templateUrl: 'todos.html'
 })
-export class TodosPage implements OnInit{
+export class TodosPage implements OnInit, OnDestroy{
 	todos;
+	subscription;
 	
 	constructor(public todoService: TodoService){
 		//console.log('in todoService constructor');
 		
+	}
+	
+	handleTodoChange(e, todo){
+		console.log('todo changed', e);
+		console.log(todo._id);
+		
+		// need to call API to update todo
+		
+		this.subscription = this.todoService.updateTodo(todo)
+			.subscribe( res =>{
+				console.log('update res',res);
+			});
 	}
 	
 	ngOnInit(){
@@ -23,5 +36,9 @@ export class TodosPage implements OnInit{
 				console.log(res);
 				this.todos = res.todos;
 			})
+	}
+	
+	ngOnDestroy(){
+		this.subscription.unsubscribe();
 	}
 }

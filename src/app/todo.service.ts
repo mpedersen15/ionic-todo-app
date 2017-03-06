@@ -66,8 +66,11 @@ export class TodoService {
 		
 	}
 	
-	updateTodo(){
-		
+	updateTodo(todo){
+		let id = todo._id, text = todo.text, completed = todo.completed;
+		//console.log(id, text, completed);
+		//console.log(typeof id);
+		return this.http.patch(this.todoUrl+"/todos/"+id, {text: text, completed}, {headers: this.headers});
 	}
 	
 	deleteTodo(){
