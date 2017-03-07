@@ -27,6 +27,17 @@ export class TodosPage implements OnInit, OnDestroy{
 			});
 	}
 	
+	deleteTodo(e, todo){
+		console.log('todo to delete', todo);
+		this.subscription = this.todoService.deleteTodo(todo)
+			.subscribe( res => {
+				console.log('delete todo res',res);
+				
+				this.todos.splice(this.todos.indexOf(res.todos), 1);
+				
+			});
+	}
+	
 	ngOnInit(){
 		console.log('todos page inited. getting todos...');
 		console.log(this.todoService);

@@ -1,27 +1,34 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Todo List</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Todo List</ion-title>
+	</ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-	<h3>My Todos</h3>
-<!-- 	<ul>
+	<h3 text-center>My Todos</h3>
+	<!-- 	<ul>
 		<li *ngFor="let todo of todos">
 			<input type="checkbox" name="todoCheck" [(ngModel)]="todo.completed" (change)="handleTodoChange($event, todo)" />{{todo.text}}
 		</li>
 	</ul> -->
 	
 	<ion-list>
-		<ion-item *ngFor="let todo of todos">
-			<ion-label>{{todo.text}}</ion-label>
-			<ion-checkbox color="" [(ngModel)]="todo.completed" (ionChange)="handleTodoChange($event, todo)"></ion-checkbox>
-		</ion-item>
+		<ion-item-sliding *ngFor="let todo of todos">
+			<ion-item >
+				<ion-label>{{todo.text}}</ion-label>
+				<ion-checkbox color="" [(ngModel)]="todo.completed" (ionChange)="handleTodoChange($event, todo)"></ion-checkbox>
+			</ion-item>
+			<ion-item-options side="left">
+				<button ion-button color="danger" (click)="deleteTodo($event, todo)"><ion-icon name="trash"></ion-icon></button>
+			</ion-item-options>
+		</ion-item-sliding>
 	</ion-list>
+
+	
 	
 </ion-content>

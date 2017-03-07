@@ -27,7 +27,7 @@ export class TodoService {
 	// User methods
 	
 	signup(email,password){
-		
+		return this.http.post(this.todoUrl+"/users", {email, password});
 	}
 	
 	getMyInfo(){
@@ -52,8 +52,8 @@ export class TodoService {
 	
 	// Todo methods
 	
-	createTodo(){
-		
+	createTodo(text){
+		return this.http.post(this.todoUrl+"/todos", {text}, {headers: this.headers});
 	}
 	
 	getTodos(){
@@ -73,7 +73,9 @@ export class TodoService {
 		return this.http.patch(this.todoUrl+"/todos/"+id, {text: text, completed}, {headers: this.headers});
 	}
 	
-	deleteTodo(){
-		
+	deleteTodo(todo){
+		console.log('in service delete', todo);
+		let id = todo._id;
+		return this.http.delete(this.todoUrl+"/todos/"+id, {headers: this.headers}).map( res => res.json() );
 	}
 }
