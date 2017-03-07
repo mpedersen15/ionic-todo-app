@@ -2,6 +2,7 @@ import { Component , OnInit, OnDestroy} from '@angular/core';
 import { TodoService } from '../../app/todo.service';
 import { NavController, ModalController } from 'ionic-angular';
 import { CreateTodoPage } from '../create-todo/create-todo';
+import { EditTodoPage } from '../edit-todo/edit-todo';
 
 @Component({
   selector: 'page-todos',
@@ -34,7 +35,7 @@ export class TodosPage implements OnInit, OnDestroy{
 			.subscribe( res => {
 				console.log('delete todo res',res);
 				
-				this.todos.splice(this.todos.indexOf(res.todos), 1);
+				this.getTodos();
 				
 			});
 	}
@@ -42,16 +43,37 @@ export class TodosPage implements OnInit, OnDestroy{
 	openCreateModal(){
 		let modal = this.modalController.create(CreateTodoPage);
 		
+		modal.onDidDismiss( data => {
+			console.log(data);
+			if (data === 'todo created'){
+				this.getTodos();
+			}
+		})
+		
 		modal.present();
 	}
 	
 	getTodos(){
+		console.log('in getTodos');
 		this.subscription = this.todoService.getTodos()
 			.subscribe(res => {
 				//this.todos = res.todos;
 				console.log(res);
 				this.todos = res.todos;
 			})
+	}
+	
+	openEditModal(e,todo){
+		let modal = this.modalController.create(EditTodoPage, {todo});
+		
+		modal.onDidDismiss( data => {
+			console.log(data);
+			if (data === 'todo created'){
+				this.getTodos();
+			}
+		})
+		
+		modal.present();
 	}
 	
 	ngOnInit(){

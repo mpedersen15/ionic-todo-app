@@ -1,7 +1,7 @@
 <ion-header>
 	<ion-toolbar>
 		<ion-title>
-      Create Todo
+      Edit Todo
 		</ion-title>
 		<ion-buttons start>
 			<button ion-button (click)="dismiss()">
@@ -12,12 +12,12 @@
 	</ion-toolbar>
 </ion-header>
 <ion-content>
-	<form [formGroup]="createTodoForm" (ngSubmit)="createTodo($event)">
+	<form [formGroup]="editTodoForm" (ngSubmit)="editTodo($event)">  
 		<ion-list>
 			<ion-item>
 				<ion-input type="text" placeholder="Ex. Feed the dogs" formControlName="text"></ion-input>
 			</ion-item>
 		</ion-list>
-		<button ion-button full type="submit">Create</button>
+		<button ion-button full type="submit">Save</button>
 	</form>
 </ion-content>

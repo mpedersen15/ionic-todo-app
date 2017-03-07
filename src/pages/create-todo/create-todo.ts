@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Platform, NavParams, ViewController } from 'ionic-angular';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TodoService } from '../../app/todo.service';
 
 
@@ -10,6 +10,7 @@ import { TodoService } from '../../app/todo.service';
 export class CreateTodoPage implements OnDestroy{
   createTodoForm: FormGroup;
   subscription;
+  @Output() onCreated = new EventEmitter();
   
   constructor(
     public platform: Platform,
@@ -28,7 +29,8 @@ export class CreateTodoPage implements OnDestroy{
 	  this.subscription = this.todoService.createTodo(this.createTodoForm.value.text).subscribe(res => {
 		  console.log('createTodo res', res);
 		  
-		  this.viewCtrl.dismiss();
+		  this.onCreated.emit(res);
+		  this.viewCtrl.dismiss('todo created');
 		  
 		  // Emit an event to todos.ts to update todo list
 	  });
@@ -39,6 +41,9 @@ export class CreateTodoPage implements OnDestroy{
   }
   
   ngOnDestroy(){
-	  this.subscription.unsubscribe();
+	  if (this.subscription){
+		  this.subscription.unsubscribe();
+	  }
+	  
   }
 }

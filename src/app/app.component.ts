@@ -7,6 +7,9 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { SignUpPage } from '../pages/signup/signup';
+import { TodosPage } from '../pages/todos/todos';
+import { TodoService } from './todo.service';
 
 
 @Component({
@@ -18,19 +21,27 @@ export class MyApp {
   // make HelloIonicPage the root (or first) page
   rootPage: any = LoginPage;
   pages: Array<{title: string, component: any}>;
+  authPages: Array<{title: string, component: any}>;
 
   constructor(
     public platform: Platform,
-    public menu: MenuController
+    public menu: MenuController,
+	public todoService: TodoService
   ) {
     this.initializeApp();
 
-    // set our app's pages
+    // set our app's pages (UNAUTHENTICATED)
     this.pages = [
-      { title: 'Hello Ionic', component: HelloIonicPage },
-      { title: 'My First List', component: ListPage },
-      { title: 'Login', component: LoginPage }
+      //{ title: 'Hello Ionic', component: HelloIonicPage },
+      //{ title: 'My First List', component: ListPage },
+      { title: 'Login', component: LoginPage },
+      { title: 'Sign Up', component: SignUpPage }
     ];
+	
+	this.authPages = [
+		{ title: 'Todos', component: TodosPage }
+	]
+
   }
 
   initializeApp() {
@@ -47,5 +58,16 @@ export class MyApp {
     this.menu.close();
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
+  }
+  
+  logout(){
+	  this.todoService.removeHeaders();
+	  
+	  this.menu.close();
+	  
+	  this.menu.enable(false, 'authenticated');
+	  this.menu.enable(true, 'unauthenticated');
+	  
+	  this.nav.setRoot(LoginPage);
   }
 }

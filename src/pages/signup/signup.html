@@ -3,15 +3,15 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Login</ion-title>
+    <ion-title>Sign Up</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
 
-	<p>Login below:</p>  
-	<form [formGroup]="loginForm" (ngSubmit)="doLogin($event)">
+	<p>Sign up below:</p>
+	<form [formGroup]="signUpForm" (ngSubmit)="doSignUp($event)">
 		<ion-list>
 		
 			<ion-item>
@@ -22,12 +22,16 @@
 				<ion-input placeholder="Password" type="password" formControlName="password"></ion-input>
 			</ion-item>			
 	
+			<!-- <ion-item>
+				<ion-input placeholder="Confirm Password" type="password" formControlName="password-confirm"></ion-input>
+			</ion-item>	 -->
+	
 		</ion-list>
 	
-		<button ion-button block round type="submit">Login</button>
+		<button ion-button block round type="submit">Sign Up</button>
 		
 	</form>
 	
-	<ion-item>Don't have an account? <button ion-button item-right clear (click)="goToSignUp()">Sign Up</button></ion-item>
-	
+	<ion-item>Already have an account? <button ion-button item-right clear (click)="goToLogin()">Login</button></ion-item>
+
 </ion-content>

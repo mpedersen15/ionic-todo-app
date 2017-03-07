@@ -6,9 +6,9 @@ import 'rxjs/add/operator/map';
 export class TodoService {
 	
 	todoUrl = 'https://obscure-woodland-53958.herokuapp.com';
-	token = "default token";
+	token;
 	headers;
-	todos = ['blah 1','blah 2'];
+	todos = [];
 	
 	constructor(public http: Http){
 		console.log('in todoService constructor', this.token);
@@ -22,6 +22,10 @@ export class TodoService {
 		console.log('setting headers', token);
 		this.token = token;
 		this.headers = new Headers({ 'x-auth': token});
+	}
+	
+	removeHeaders(){
+		this.headers.delete('x-auth');
 	}
 	
 	// User methods

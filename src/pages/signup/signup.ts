@@ -5,32 +5,33 @@ import 'rxjs/add/operator/map';
 import {TodoService} from '../../app/todo.service';
 import { NavController, LoadingController, MenuController } from 'ionic-angular';
 import {TodosPage} from '../todos/todos';
-import {SignUpPage} from '../signup/signup';
+import {LoginPage} from '../login/login';
 
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html'
+  selector: 'page-signup',
+  templateUrl: 'signup.html'
 })
-export class LoginPage implements OnDestroy {
-	loginForm: FormGroup;
+export class SignUpPage implements OnDestroy {
+	signUpForm: FormGroup;
 	testArray = [];
 	token;
 	subscription;
 	loader;
 	constructor(public fb: FormBuilder, public http: Http, public todoService: TodoService, public navController: NavController, public loadingCtrl: LoadingController, public menu: MenuController) {
-		this.loginForm = fb.group({
+		this.signUpForm = fb.group({
             "email": ["", Validators.required],
-            "password":["", Validators.required]
+            "password":["", Validators.required]/* ,  
+            "password-confirm":["", Validators.required] */
         });
 	}
 	
-	doLogin(event) {
+	doSignUp(event) {
 		this.showLoading();
 		
-		console.log(event);
-		console.log(this.loginForm.value);
+		console.log('sign up',event);
+		console.log(this.signUpForm.value);
 		
-		this.subscription = this.todoService.login(this.loginForm.value.email, this.loginForm.value.password)
+		this.subscription = this.todoService.signup(this.signUpForm.value.email, this.signUpForm.value.password)
 			.subscribe(res => {
 				
 				console.log('login res', res);
@@ -48,18 +49,18 @@ export class LoginPage implements OnDestroy {
 	
 	showLoading(){
 		this.loader = this.loadingCtrl.create({
-			content: "Logging in...",
+			content: "Signing up..."
 		});
 		this.loader.present();
 	}
 	
-	goToSignUp(){
-		this.navController.setRoot(SignUpPage);
+	goToLogin(){
+		this.navController.setRoot(LoginPage);
 	}
 	
 	ngOnDestroy(){
 		if (this.subscription){
-		  this.subscription.unsubscribe();
+			this.subscription.unsubscribe();
 		}
 	}
 }

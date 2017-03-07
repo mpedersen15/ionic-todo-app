@@ -10,14 +10,17 @@
 
 <ion-content>
 
-	<h3 text-center>My Todos</h3>
 	<!-- 	<ul>
 		<li *ngFor="let todo of todos">
 			<input type="checkbox" name="todoCheck" [(ngModel)]="todo.completed" (change)="handleTodoChange($event, todo)" />{{todo.text}}
 		</li>
 	</ul> -->
-	<button ion-button full outline (click)="openCreateModal()">Create Todo</button>
+	
 	<ion-list>
+		<ion-list-header>
+			My Todos
+			<button ion-button icon-only clear color="primary" item-right (click)="openCreateModal()"><ion-icon name="add"></ion-icon></button>
+		</ion-list-header>
 		<ion-item-sliding *ngFor="let todo of todos">
 			<ion-item >
 				<ion-label>{{todo.text}}</ion-label>
@@ -26,10 +29,12 @@
 			<ion-item-options side="left">
 				<button ion-button color="danger" (click)="deleteTodo($event, todo)"><ion-icon name="trash"></ion-icon></button>
 			</ion-item-options>
+			
+			<ion-item-options side="right">
+				<button ion-button color="secondary" (click)="openEditModal($event, todo)">Edit</button>
+			</ion-item-options>
+			
 		</ion-item-sliding>
 	</ion-list>
-
-	<button ion-button full outline (click)="getTodos()">Refresh</button>
-	
 	
 </ion-content>
