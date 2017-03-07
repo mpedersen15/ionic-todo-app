@@ -16,7 +16,7 @@
 			<input type="checkbox" name="todoCheck" [(ngModel)]="todo.completed" (change)="handleTodoChange($event, todo)" />{{todo.text}}
 		</li>
 	</ul> -->
-	
+	<button ion-button full outline (click)="openCreateModal()">Create Todo</button>
 	<ion-list>
 		<ion-item-sliding *ngFor="let todo of todos">
 			<ion-item >
@@ -29,6 +29,7 @@
 		</ion-item-sliding>
 	</ion-list>
 
+	<button ion-button full outline (click)="getTodos()">Refresh</button>
 	
 	
 </ion-content>

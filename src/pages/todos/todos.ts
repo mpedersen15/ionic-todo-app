@@ -1,6 +1,7 @@
 import { Component , OnInit, OnDestroy} from '@angular/core';
-import {TodoService} from '../../app/todo.service';
-import { NavController } from 'ionic-angular';
+import { TodoService } from '../../app/todo.service';
+import { NavController, ModalController } from 'ionic-angular';
+import { CreateTodoPage } from '../create-todo/create-todo';
 
 @Component({
   selector: 'page-todos',
@@ -10,7 +11,7 @@ export class TodosPage implements OnInit, OnDestroy{
 	todos;
 	subscription;
 	
-	constructor(public todoService: TodoService){
+	constructor(public todoService: TodoService, public modalController: ModalController){
 		//console.log('in todoService constructor');
 		
 	}
@@ -38,16 +39,34 @@ export class TodosPage implements OnInit, OnDestroy{
 			});
 	}
 	
-	ngOnInit(){
-		console.log('todos page inited. getting todos...');
-		console.log(this.todoService);
-		this.todoService.getTodos()
+	openCreateModal(){
+		let modal = this.modalController.create(CreateTodoPage);
+		
+		modal.present();
+	}
+	
+	getTodos(){
+		this.subscription = this.todoService.getTodos()
 			.subscribe(res => {
 				//this.todos = res.todos;
 				console.log(res);
 				this.todos = res.todos;
 			})
 	}
+	
+	ngOnInit(){
+		console.log('todos page inited. getting todos...');
+		console.log(this.todoService);
+		this.getTodos();
+		/* this.subscription = this.todoService.getTodos()
+			.subscribe(res => {
+				//this.todos = res.todos;
+				console.log(res);
+				this.todos = res.todos;
+			}) */
+	}
+	
+	
 	
 	ngOnDestroy(){
 		this.subscription.unsubscribe();

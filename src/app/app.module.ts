@@ -6,6 +6,7 @@ import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { TodosPage } from '../pages/todos/todos';
+import { CreateTodoPage } from '../pages/create-todo/create-todo';
 import { TodoService } from './todo.service';
 
 import { HttpModule } from '@angular/http';
@@ -17,7 +18,8 @@ import { HttpModule } from '@angular/http';
     ItemDetailsPage,
     ListPage,
 	LoginPage,
-	TodosPage
+	TodosPage,
+	CreateTodoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -30,7 +32,8 @@ import { HttpModule } from '@angular/http';
     ItemDetailsPage,
     ListPage,
 	LoginPage,
-	TodosPage
+	TodosPage,
+	CreateTodoPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, TodoService ]
 })

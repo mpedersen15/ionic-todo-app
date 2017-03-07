@@ -53,6 +53,7 @@ export class TodoService {
 	// Todo methods
 	
 	createTodo(text){
+		console.log('createTodo service', text);
 		return this.http.post(this.todoUrl+"/todos", {text}, {headers: this.headers});
 	}
 	
