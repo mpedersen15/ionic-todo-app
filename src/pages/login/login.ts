@@ -33,7 +33,7 @@ export class LoginPage implements OnDestroy {
 				console.log('login res', res);
 
 				this.todoService.setHeaders(res.headers.get('x-auth'));
-				this.navController.push(TodosPage);
+				this.navController.setRoot(TodosPage);
 				
 			});
 	}
